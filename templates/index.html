@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>RythuMitra - Smart Farming</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial;
+            background: linear-gradient(135deg, #1b5e20, #0d47a1);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 { color: #2e7d32; text-align: center; }
+        .status {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            color: #2e7d32;
+            margin: 20px 0;
+        }
+        button {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+        }
+        button:hover { background: #388e3c; }
+        .result {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .feature {
+            display: inline-block;
+            background: #e3f2fd;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌾 RythuMitra</h1>
+        <h2 style="text-align:center">Smart Farming Guidance Platform</h2>
+        
+        <div class="status">
+            ✅ Server is running successfully! | 15+ Detailed Suggestions for Each Crop
+        </div>
+        
+        <div style="text-align:center; margin:20px 0">
+            <span class="feature">🌾 Paddy (వరి)</span>
+            <span class="feature">🌿 Cotton (ప్రత్తి)</span>
+            <span class="feature">🌶️ Chilli (మిరప)</span>
+            <span class="feature">🍅 Tomato (టమోటా)</span>
+            <span class="feature">🗣️ Telugu Support</span>
+        </div>
+        
+        <h3>📱 Test WhatsApp API (15+ Suggestions):</h3>
+        <button onclick="testMessage('paddy')">🌾 Test: Paddy (వరి)</button>
+        <button onclick="testMessage('cotton')">🌿 Test: Cotton (ప్రత్తి)</button>
+        <button onclick="testMessage('chilli')">🌶️ Test: Chilli (మిరప)</button>
+        <button onclick="testMessage('tomato')">🍅 Test: Tomato (టమోటా)</button>
+        <button onclick="testMessage('help')">❓ Test: Help Menu</button>
+        
+        <div class="result" id="result">
+            Click a button to get 15+ detailed suggestions...
+        </div>
+        
+        <h3>🔌 API Endpoints:</h3>
+        <div class="result" style="background:#263238; color:white;">
+            POST http://localhost:8888/api/whatsapp - WhatsApp Webhook<br>
+            GET http://localhost:8888/api/crops - Get Crops List<br>
+            GET http://localhost:8888/dashboard - Admin Dashboard<br>
+            GET http://localhost:8888/health - Health Check
+        </div>
+    </div>
+    
+    <script>
+        async function testMessage(msg) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '📤 Sending: "' + msg + '"...<br>Loading 15+ suggestions...';
+            
+            try {
+                const res = await fetch('/api/whatsapp', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        phone_number: '+919876543210',
+                        message: msg
+                    })
+                });
+                const data = await res.json();
+                resultDiv.innerHTML = '<strong>✅ 15+ Detailed Suggestions:</strong><br><br>' + data.message.replace(/\n/g, '<br>');
+            } catch(err) {
+                resultDiv.innerHTML = '❌ Error: ' + err.message;
+            }
+        }
+    </script>
+</body>
+</html>
