@@ -68,27 +68,27 @@ def init_database():
     
     conn.commit()
     conn.close()
-    print("✅ Database initialized!")
+    print("✅ డేటాబేస్ సిద్ధమైంది!")
 
 # Lifespan context manager
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    print("🚀 Starting RythuMitra...")
+    print("🚀 రైతుమిత్ర స్టార్ట్ అవుతుంది...")
     init_database()
     print("""
     ════════════════════════════════════════════
-    🌾 RythuMitra - Smart Farming Platform
+    🌾 రైతుమిత్ర - స్మార్ట్ వ్యవసాయ వేదిక
     ════════════════════════════════════════════
-    ✅ Server is running!
-    📍 Dashboard: http://localhost:8888/dashboard
-    💬 WhatsApp API: POST http://localhost:8888/api/whatsapp
+    ✅ సర్వర్ రన్నింగ్!
+    📍 డ్యాష్ బోర్డు: /dashboard
+    💬 వాట్సాప్ API: POST /api/whatsapp
     ════════════════════════════════════════════
     """)
     yield
-    print("🛑 Shutting down...")
+    print("🛑 సర్వర్ ఆగిపోతుంది...")
 
 # Create FastAPI app
-app = FastAPI(title="RythuMitra", lifespan=lifespan)
+app = FastAPI(title="రైతుమిత్ర", lifespan=lifespan)
 
 # Setup templates
 templates = Jinja2Templates(directory="templates")
@@ -123,13 +123,13 @@ async def dashboard(request: Request):
         "queries_count": queries_count
     })
 
-# WhatsApp webhook with 15+ suggestions
+# WhatsApp webhook with 15+ suggestions in Telugu
 @app.post("/api/whatsapp")
 async def whatsapp_webhook(query: FarmerQuery):
     message = query.message.lower()
     
     # ============================================
-    # CHILLI (మిరప) - 15+ COMPLETE SUGGESTIONS
+    # CHILLI (మిరప) - 15+ సంపూర్ణ సలహాలు
     # ============================================
     if "chilli" in message or "మిరప" in message or "mirchi" in message:
         response = """🌶️ **మిరప పంట - 15+ సంపూర్ణ సలహాలు** 🌶️
@@ -141,37 +141,37 @@ async def whatsapp_webhook(query: FarmerQuery):
    💊 Chlorfenapyr 10% SC - 1.0 ml/L
    💊 Fipronil 5% SC - 1.0 ml/L
    ⏰ PHI: 14 రోజులు
-   🌿 Organic: Neem oil 5ml/L + Sticker
+   🌿 సేంద్రియ: వేప నూనె 5ml/L + సబ్బు
 
 2. **మిరపకాయ పురుగు (Fruit Borer):**
    💊 Emamectin Benzoate 5% SG - 0.4 gm/L
    💊 Spinosad 45% SC - 0.5 ml/L
    💊 Indoxacarb 15.5% SC - 0.5 ml/L
    ⏰ PHI: 10 రోజులు
-   🌿 Organic: NSKE 5% + Pheromone traps
+   🌿 సేంద్రియ: NSKE 5% + ఫెరోమోన్ ట్రాప్స్
 
 3. **ఆకు తొలుచు పురుగు (Leaf Roller):**
    💊 Chlorantraniliprole 18.5% SC - 0.3 ml/L
    💊 Flubendiamide 20% WG - 0.3 gm/L
    ⏰ PHI: 21 రోజులు
-   🌿 Organic: Bt (Bacillus thuringiensis)
+   🌿 సేంద్రియ: Bt (Bacillus thuringiensis)
 
 4. **సాలీడు పురుగు (Mites):**
    💊 Propargite 57% EC - 1.5 ml/L
    💊 Fenazaquin 10% EC - 1.5 ml/L
    💊 Abamectin 1.9% EC - 0.4 ml/L
    ⏰ PHI: 14 రోజులు
-   🌿 Organic: Suffoil (1 ml/L)
+   🌿 సేంద్రియ: సఫాయిల్ (1 ml/L)
 
 5. **పిండి పురుగు (Mealybug):**
    💊 Buprofezin 25% SC - 1.5 ml/L
    💊 Diafenthiuron 50% WP - 0.8 gm/L
-   🌿 Organic: Neem oil + Sticker
+   🌿 సేంద్రియ: వేప నూనె + స్టిక్కర్
 
 6. **తొండ పురుగు (Tobacco Caterpillar):**
    💊 Novaluron 10% EC - 0.75 ml/L
    💊 Lufenuron 5% EC - 1.0 ml/L
-   🌿 Organic: Light traps + Bt
+   🌿 సేంద్రియ: లైట్ ట్రాప్స్ + Bt
 
 🍄 **వ్యాధులు (Diseases) - 5 రకాలు:**
 
@@ -179,7 +179,7 @@ async def whatsapp_webhook(query: FarmerQuery):
    💊 Sulfur 80% WP - 2.0 gm/L
    💊 Hexaconazole 5% SC - 1.0 ml/L
    💊 Tebuconazole 25% EC - 1.0 ml/L
-   🌿 Organic: Baking soda (2gm/L) + Oil
+   🌿 సేంద్రియ: బేకింగ్ సోడా (2gm/L) + నూనె
 
 8. **ఆకు మచ్చ (Leaf Spot - Cercospora):**
    💊 Carbendazim 50% WP - 1.0 gm/L
@@ -189,7 +189,7 @@ async def whatsapp_webhook(query: FarmerQuery):
 9. **వేరు తెగులు (Root Rot):**
    💊 Carbendazim + Trichoderma
    💊 Tebuconazole 25% EC
-   🌿 Organic: Pseudomonas fluorescens
+   🌿 సేంద్రియ: Pseudomonas fluorescens
 
 10. **కొమ్మ చివరి తెగులు (Die Back):**
     💊 Difenoconazole 25% EC - 1.0 ml/L
@@ -198,7 +198,7 @@ async def whatsapp_webhook(query: FarmerQuery):
 11. **ఆకు ముడత వైరస్ (Leaf Curl Virus):**
     💊 Imidacloprid 17.8% SL - 0.3 ml/L
     💊 Acetamiprid 20% SP - 0.2 gm/L
-    🦟 Whitefly control is key
+    🦟 తెల్లదోమ నియంత్రణ తప్పనిసరి
 
 🌱 **సేంద్రియ ఎంపికలు (Organic Options) - 6 రకాలు:**
 
@@ -213,12 +213,12 @@ async def whatsapp_webhook(query: FarmerQuery):
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🌱 **నాట్లు & విత్తనాలు:**
-1. విత్తనాలు: Teja, Indam-5, G4, LCA-625
-2. నాట్ల దూరం: 45 cm x 45 cm (TWD)
-3. విత్తన శుద్ధి: Trichoderma 10 gm/kg
+1. విత్తనాలు: తేజ, ఇందమ్-5, జీ4, ఎల్సీఏ-625
+2. నాట్ల దూరం: 45 cm x 45 cm
+3. విత్తన శుద్ధి: ట్రైకోడెర్మా 10 gm/kg
 
 🌾 **ఎరువులు (Fertilizers):**
-4. N:P:K = 120:60:40 kg/ఎకరా
+4. ఎన్:పి:కే = 120:60:40 kg/ఎకరా
 5. సేంద్రియ ఎరువు: 10 టన్నులు/ఎకరా
 6. జింక్ సల్ఫేట్: 25 kg/ఎకరా (30 రోజులకు)
 7. బోరాన్: 10 kg/ఎకరా (పూతకు ముందు)
@@ -246,7 +246,7 @@ async def whatsapp_webhook(query: FarmerQuery):
 🌾 **రైతుమిత్ర - మీ విశ్వసనీయ వ్యవసాయ స్నేహితుడు**"""
 
     # ============================================
-    # COTTON (ప్రత్తి) - 15+ COMPLETE SUGGESTIONS
+    # COTTON (ప్రత్తి) - 15+ సంపూర్ణ సలహాలు
     # ============================================
     elif "cotton" in message or "ప్రత్తి" in message or "pratti" in message:
         response = """🌿 **ప్రత్తి పంట - 15+ సంపూర్ణ సలహాలు** 🌿
@@ -259,18 +259,18 @@ async def whatsapp_webhook(query: FarmerQuery):
    💊 Emamectin Benzoate 5% SG - 0.4 gm/L
    💊 Indoxacarb 15.5% SC - 0.5 ml/L
    ⏰ PHI: 21 రోజులు
-   🌿 Organic: NSKE 5% + Pheromone traps (12/ఎకరా)
+   🌿 సేంద్రియ: NSKE 5% + ఫెరోమోన్ ట్రాప్స్ (12/ఎకరా)
 
 2. **పిండి పురుగు (Mealybug):**
    💊 Buprofezin 25% SC - 1.5 ml/L
    💊 Diafenthiuron 50% WP - 0.8 gm/L
    💊 Chlorpyriphos 20% EC - 2.0 ml/L
-   🌿 Organic: Neem oil 5ml/L + Blue sticky traps
+   🌿 సేంద్రియ: వేప నూనె 5ml/L + నీలం స్టిక్కీ ట్రాప్స్
 
 3. **పొగాకు తొండ (Tobacco Caterpillar):**
    💊 Chlorantraniliprole 18.5% SC - 0.3 ml/L
    💊 Flubendiamide 20% WG - 0.3 gm/L
-   🌿 Organic: Bt + Light traps (1/2 ఎకరాకు)
+   🌿 సేంద్రియ: Bt + లైట్ ట్రాప్స్ (1/2 ఎకరాకు)
 
 4. **సాలీడు పురుగు (Red Spider Mite):**
    💊 Abamectin 1.9% EC - 0.4 ml/L
@@ -281,7 +281,7 @@ async def whatsapp_webhook(query: FarmerQuery):
    💊 Imidacloprid 17.8% SL - 0.3 ml/L
    💊 Diafenthiuron 50% WP - 0.6 gm/L
    💊 Pyriproxyfen 10% EC - 1.0 ml/L
-   🌿 Organic: Yellow sticky traps (20/ఎకరా)
+   🌿 సేంద్రియ: పసుపు స్టిక్కీ ట్రాప్స్ (20/ఎకరా)
 
 6. **ఆకు తొలుచు పురుగు (Leaf Roller):**
    💊 Cartap Hydrochloride 50% SP - 0.8 gm/L
@@ -296,7 +296,7 @@ async def whatsapp_webhook(query: FarmerQuery):
 8. **వేరు తెగులు (Root Rot):**
    💊 Trichoderma viride - 2.5 kg/ఎకరా
    💊 Carbendazim 50% WP - 1.0 gm/L
-   🌿 Organic: Pseudomonas fluorescens
+   🌿 సేంద్రియ: Pseudomonas fluorescens
 
 9. **ఆకు మచ్చ (Alternaria Leaf Spot):**
    💊 Hexaconazole 5% SC - 1.0 ml/L
@@ -304,8 +304,8 @@ async def whatsapp_webhook(query: FarmerQuery):
    💊 Chlorothalonil 75% WP - 2.0 gm/L
 
 10. **ఆకు ముడత వైరస్ (Leaf Curl Virus):**
-    💊 Imidacloprid + Oil
-    🦟 Whitefly నియంత్రణ తప్పనిసరి
+    💊 Imidacloprid + నూనె
+    🦟 తెల్లదోమ నియంత్రణ తప్పనిసరి
 
 11. **కొమ్మ తెగులు (Boll Rot):**
     💊 Carbendazim 50% WP - 1.0 gm/L
@@ -313,7 +313,7 @@ async def whatsapp_webhook(query: FarmerQuery):
 
 12. **ఆకు ఎర్రబారు (Red Leaf):**
     💊 Magnesium Sulphate - 10 gm/L
-    💊 Urea - 10 gm/L (Foliar spray)
+    💊 Urea - 10 gm/L (ఆకు పైన స్ప్రే)
 
 🌱 **సేంద్రియ ఎంపికలు (Organic Options) - 6 రకాలు:**
 
@@ -326,19 +326,19 @@ async def whatsapp_webhook(query: FarmerQuery):
 
 🧪 **సూక్ష్మ పోషకాలు (Micro-nutrients):**
 
-19. **జింక్ (Zinc):** Zinc Sulphate 25 kg/ఎకరా
-20. **బోరాన్ (Boron):** Borax 10 kg/ఎకరా
+19. **జింక్ (Zinc):** జింక్ సల్ఫేట్ 25 kg/ఎకరా
+20. **బోరాన్ (Boron):** బోరాక్స్ 10 kg/ఎకరా
 21. **మెగ్నీషియం (Mg):** Mg Sulphate 15 kg/ఎకరా
-22. **ఐరన్ (Iron):** Ferrous Sulphate 10 kg/ఎకరా
-23. **కాల్షియం (Ca):** Calcium Nitrate 5 kg/ఎకరా
+22. **ఐరన్ (Iron):** ఫెర్రస్ సల్ఫేట్ 10 kg/ఎకరా
+23. **కాల్షియం (Ca):** కాల్షియం నైట్రేట్ 5 kg/ఎకరా
 
 💡 **సాగు చిట్కాలు (15 Important Tips):**
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🌱 **విత్తనాలు & నాట్లు:**
-1. Bt Cotton: MECH-162, RCH-659, Bunny
-2. నాట్ల దూరం: 90 cm x 60 cm (EW direction)
-3. విత్తన శుద్ధి: Imidacloprid 5 ml/kg
+1. Bt ప్రత్తి: MECH-162, RCH-659, బన్నీ
+2. నాట్ల దూరం: 90 cm x 60 cm (తూర్పు-పడమర)
+3. విత్తన శుద్ధి: ఇమిడాక్లోప్రిడ్ 5 ml/kg
 
 🌾 **ఎరువులు (Fertilizers):**
 4. N:P:K = 120:60:60 kg/ఎకరా (Split doses)
@@ -369,12 +369,12 @@ async def whatsapp_webhook(query: FarmerQuery):
 • ప్రతి 10-15 రోజులకు మందు మార్చండి
 
 🔄 **పంట మార్పిడి (3 సంవత్సరాలు):**
-Year 1: Cotton → Year 2: Chilli → Year 3: Maize
+1వ సంవత్సరం: ప్రత్తి → 2వ సంవత్సరం: మిరప → 3వ సంవత్సరం: మొక్కజొన్న
 
 🌾 **రైతుమిత్ర - మీ స్మార్ట్ వ్యవసాయ స్నేహితుడు**"""
 
     # ============================================
-    # PADDY (వరి) - 15+ COMPLETE SUGGESTIONS
+    # PADDY (వరి) - 15+ సంపూర్ణ సలహాలు
     # ============================================
     elif "paddy" in message or "వరి" in message or "vari" in message:
         response = """🌾 **వరి పంట - 15+ సంపూర్ణ సలహాలు** 🌾
@@ -386,8 +386,8 @@ Year 1: Cotton → Year 2: Chilli → Year 3: Maize
    💊 Chlorantraniliprole 18.5% SC - 0.4 ml/L
    💊 Cartap Hydrochloride 50% SP - 0.8 gm/L
    💊 Fipronil 5% SC - 1.0 ml/L
-   ⏰ Spray at 25-30, 45-50 days
-   🌿 Organic: Neem oil + Pheromone traps
+   ⏰ స్ప్రే సమయం: 25-30, 45-50 రోజులకు
+   🌿 సేంద్రియ: వేప నూనె + ఫెరోమోన్ ట్రాప్స్
 
 2. **ఆకు మంట (Leaf Blast):**
    💊 Tricyclazole 75% WP - 0.6 gm/L
@@ -398,7 +398,7 @@ Year 1: Cotton → Year 2: Chilli → Year 3: Maize
 3. **ఆకు తొలుచు పురుగు (Leaf Folder):**
    💊 Chlorantraniliprole 18.5% SC - 0.3 ml/L
    💊 Flubendiamide 20% WG - 0.3 gm/L
-   🌿 Organic: Bt + Light traps
+   🌿 సేంద్రియ: Bt + లైట్ ట్రాప్స్
 
 4. **గోనె పురుగు (Case Worm):**
    💊 Fipronil 5% SC - 1.0 ml/L
@@ -426,7 +426,7 @@ Year 1: Cotton → Year 2: Chilli → Year 3: Maize
 9. **కంకి తెగులు (False Smut):**
    💊 Propiconazole 25% EC - 1.0 ml/L
    💊 Copper Oxycloride 50% WP - 2.0 gm/L
-   ⏰ Spray at flowering (50% panicle emergence)
+   ⏰ స్ప్రే సమయం: పూత దశలో (50% పూత వచ్చినప్పుడు)
 
 10. **ఆకు మచ్చ (Brown Spot):**
     💊 Edifenphos 50% EC - 1.0 ml/L
@@ -437,7 +437,7 @@ Year 1: Cotton → Year 2: Chilli → Year 3: Maize
     💊 Streptocycline - 0.5 gm/L
 
 12. **నాటు విరుగుడు (Bacterial Blight):**
-    💊 Streptocycline - 0.5 gm/L + Copper
+    💊 Streptocycline - 0.5 gm/L + రాగి
 
 🌱 **సేంద్రియ ఎంపికలు (Organic Options) - 6 రకాలు:**
 
@@ -488,7 +488,7 @@ Year 1: Cotton → Year 2: Chilli → Year 3: Maize
 🌾 **రైతుమిత్ర - మీ విశ్వసనీయ వ్యవసాయ స్నేహితుడు**"""
 
     # ============================================
-    # TOMATO (టమోటా) - 15+ COMPLETE SUGGESTIONS
+    # TOMATO (టమోటా) - 15+ సంపూర్ణ సలహాలు
     # ============================================
     elif "tomato" in message or "టమోటా" in message:
         response = """🍅 **టమోటా పంట - 15+ సంపూర్ణ సలహాలు** 🍅
@@ -499,7 +499,7 @@ Year 1: Cotton → Year 2: Chilli → Year 3: Maize
 1. **ఆకు మైనర్ (Leaf Minor):**
    💊 Cyantraniliprole 10% OD - 0.3 ml/L
    💊 Abamectin 1.9% EC - 0.4 ml/L
-   🌿 Organic: Yellow sticky traps
+   🌿 సేంద్రియ: పసుపు స్టిక్కీ ట్రాప్స్
 
 2. **కాయ పురుగు (Fruit Borer):**
    💊 Emamectin Benzoate 5% SG - 0.4 gm/L
@@ -529,7 +529,7 @@ Year 1: Cotton → Year 2: Chilli → Year 3: Maize
 
 8. **వేరు తెగులు (Root Rot):**
    💊 Carbendazim 50% WP - 1.0 gm/L
-   🌿 Organic: Trichoderma viride
+   🌿 సేంద్రియ: Trichoderma viride
 
 9. **ఆకు తెగులు (Late Blight):**
    💊 Metalaxyl + Mancozeb - 2.0 gm/L
@@ -540,8 +540,8 @@ Year 1: Cotton → Year 2: Chilli → Year 3: Maize
     💊 Captan 50% WP - 2.0 gm/L
 
 11. **ఆకు ముడత (Leaf Curl Virus):**
-    💊 Imidacloprid + Oil (Whitefly control)
-    💊 Neem oil - 5 ml/L
+    💊 Imidacloprid + నూనె (Whitefly control)
+    💊 వేప నూనె - 5 ml/L
 
 12. **కాండం తెగులు (Stem Rot):**
     💊 Hexaconazole 5% SC - 1.0 ml/L
@@ -557,8 +557,8 @@ Year 1: Cotton → Year 2: Chilli → Year 3: Maize
 
 🧪 **సూక్ష్మ పోషకాలు (Micro-nutrients):**
 
-19. **జింక్:** Zinc Sulphate 25 kg/ఎకరా
-20. **బోరాన్:** Borax 10 kg/ఎకరా
+19. **జింక్:** జింక్ సల్ఫేట్ 25 kg/ఎకరా
+20. **బోరాన్:** బోరాక్స్ 10 kg/ఎకరా
 21. **కాల్షియం:** Ca Nitrate 5 gm/L (ఆకు పైన)
 22. **మెగ్నీషియం:** Mg Sulphate 10 gm/L
 
@@ -566,8 +566,8 @@ Year 1: Cotton → Year 2: Chilli → Year 3: Maize
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🌱 **విత్తనాలు & నాట్లు:**
-1. రకాలు: Pusa Ruby, Arka Vikas, PKM-1
-2. విత్తన శుద్ధి: Trichoderma 10 gm/kg
+1. రకాలు: పూసా రూబీ, అర్కా వికాస్, PKM-1
+2. విత్తన శుద్ధి: ట్రైకోడెర్మా 10 gm/kg
 3. నాట్ల దూరం: 60 cm x 45 cm
 4. నాటు వేయు లోతు: 5-7 cm
 
@@ -678,14 +678,17 @@ Year 1: Cotton → Year 2: Chilli → Year 3: Maize
 ══════════════════════════════════════════════"""
     
     # Save to database
-    conn = get_db()
-    cursor = conn.cursor()
-    cursor.execute(
-        "INSERT INTO farmer_queries (phone_number, query, response) VALUES (?, ?, ?)",
-        (query.phone_number, query.message, response)
-    )
-    conn.commit()
-    conn.close()
+    try:
+        conn = get_db()
+        cursor = conn.cursor()
+        cursor.execute(
+            "INSERT INTO farmer_queries (phone_number, query, response) VALUES (?, ?, ?)",
+            (query.phone_number, query.message, response)
+        )
+        conn.commit()
+        conn.close()
+    except:
+        pass  # Skip database errors for Vercel deployment
     
     return {
         "success": True,
@@ -708,7 +711,10 @@ async def get_crops():
 async def health_check():
     return {"status": "healthy", "service": "RythuMitra", "version": "2.0.0"}
 
-# Run the app
+# For Vercel serverless
+app_handler = app
+
+# For local development
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8888)
+    uvicorn.run(app, host="0.0.0.0", port=8888)
